@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WomanApp - Seguridad en las calles</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <h1>WomanApp - Seguridad en las calles</h1>
+            <div class="user-panel">
+                <span id="nombre-usuaria"></span>
+                <button id="btn-abrir-login" class="btn btn-sec">Iniciar Sesion</button>
+                <button id="btn-salir" class="btn btn-sec" style="display:none;">Cerrar Sesion</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-grid">
+        <!-- Contenedor del mapa con Leaflet -->
+        <section class="mapa-wrapper">
+            <div id="map"></div>
+        </section>
+
+        <!-- Panel lateral de formulario y lista -->
+        <aside class="panel-lateral">
+            <div class="caja">
+                <h3>Nuevo Reporte</h3>
+                <p id="aviso-login" class="texto-ayuda">Debes iniciar sesion para registrar un punto de riesgo.</p>
+                
+                <form id="form-reporte" style="display:none;">
+                    <div class="campo">
+                        <label for="municipio">Municipio</label>
+                        <input type="text" id="municipio" placeholder="Ej: Soacha, Fusagasuga, Chia" required>
+                    </div>
+                    <div class="campo">
+                        <label for="referencia">Punto de referencia</label>
+                        <input type="text" id="referencia" placeholder="Ej: Parque principal, Calle 13 con 7" required>
+                    </div>
+                    <div class="campo">
+                        <label for="categoria">Tipo de riesgo</label>
+                        <select id="categoria" required>
+                            <option value="iluminacion_deficiente">Iluminacion deficiente</option>
+                            <option value="acoso">Reporte de acoso</option>
+                            <option value="zona_desolada">Zona desolada</option>
+                            <option value="otro">Otro riesgo</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="descripcion">Detalles (opcional)</label>
+                        <textarea id="descripcion" rows="2" placeholder="Describe brevemente la situacion o el horario..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-pri bloque">Guardar Reporte</button>
+                </form>
+            </div>
+
+            <div class="caja">
+                <div class="cabecera-lista">
+                    <h3>Zonas Reportadas</h3>
+                    <select id="filtro-riesgo">
+                        <option value="todos">Todas las categorias</option>
+                        <option value="iluminacion_deficiente">Falta de luz</option>
+                        <option value="acoso">Acoso</option>
+                        <option value="zona_desolada">Zona sola</option>
+                        <option value="otro">Otros</option>
+                    </select>
+                </div>
+                <p class="texto-ayuda" style="margin-bottom:8px;">Ordenados por cercania a tu ubicacion actual</p>
+                <div id="contenedor-reportes" class="lista-reportes"></div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Ventana modal para Login y Registro -->
+    <div id="modal-acceso" class="modal">
+        <div class="modal-caja">
+            <span class="cerrar-modal">&times;</span>
+            <div class="tabs">
+                <button id="tab-ingresar" class="tab-item activo">Ingresar</button>
+                <button id="tab-registro" class="tab-item">Registrarse</button>
+            </div>
+
+            <form id="form-login">
+                <div class="campo">
+                    <label>Correo electronico</label>
+                    <input type="email" id="login-correo" required>
+                </div>
+                <div class="campo">
+                    <label>Contrasena</label>
+                    <input type="password" id="login-clave" required>
+                </div>
+                <button type="submit" class="btn btn-pri bloque">Entrar</button>
+            </form>
+
+            <form id="form-registro" style="display:none;">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input type="text" id="reg-nombre" required>
+                </div>
+                <div class="campo">
+                    <label>Correo electronico</label>
+                    <input type="email" id="reg-correo" required>
+                </div>
+                <div class="campo">
+                    <label>Contrasena</label>
+                    <input type="password" id="reg-clave" required>
+                </div>
+                <button type="submit" class="btn btn-pri bloque">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
